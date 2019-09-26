@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package VendorService;
+
+import "google/protobuf/timestamp.proto";
+
+service VendorService {
+    rpc GetVendorSpecification(VendorRequestSpecification) returns (stream VendorBrandSpecification){}
+    rpc RegisterOrUpdateBrand(VendorBrandSpecification) returns (BrandResponse) {}
+    rpc UnRegisterBrand(VendorRequestSpecification) returns (BrandResponse) {}
+}
+
+message VendorRequestSpecification{
+    string vendor = 1;
+    string brand = 2;
+    string tvEmac = 3;
+}
+
+message BrandResponse{
+    bool isSuccessfull  =1;
+    string responseMessage =2;
+}
+
+message VendorBrandSpecification{
+    repeated string appList = 1;
+    string searchColor = 2;
+    string fastlaneColor = 3;
+    string focusColor = 4;
+    bool hasFastlane = 5;
+    bool hasCarousel = 6;
+    string aboutUsResource = 7;
+    string brandLogoResource = 8;
+    string helpResource = 9;
+    bool activatedStatus = 10;
+    string vendor = 11;
+    string brand = 12;
+    google.protobuf.Timestamp createdAt = 14;
+    google.protobuf.Timestamp updatedAt = 15;
+}
