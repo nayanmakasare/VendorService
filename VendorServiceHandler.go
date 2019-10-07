@@ -26,7 +26,7 @@ func (sub *Subscriber) Process(ctx context.Context, vendorInfo *TileService.GetR
 }
 
 func (h *VendorServiceHandler) GetVendorSpecification(ctx context.Context, req *VendorService.VendorRequestSpecification, stream VendorService.VendorService_GetVendorSpecificationStream ) error {
-	log.Info("Get Ui Hit")
+	log.Info("Get Ui Hit ", req.Vendor, req.Brand)
 	var vendorBrandSpec VendorService.VendorBrandSpecification
 	 err := h.MongoCollection.FindOne(ctx, bson.D{{"vendor", req.Vendor},{"brand", req.Brand},}).Decode(&vendorBrandSpec)
 	 if err != nil {
